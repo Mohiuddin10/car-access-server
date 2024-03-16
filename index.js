@@ -98,6 +98,9 @@ async function run() {
             console.log(req.query.email);
             const seeCookie = req.cookies.token;
             console.log("cookie: ", seeCookie);
+            if (req.query.email !== req.user.email) {
+                return res.status(403).send({message: "forbidden access"})
+            }
             let query = {};
             if (req.query?.email){
                 query = {email: req.query.email}
